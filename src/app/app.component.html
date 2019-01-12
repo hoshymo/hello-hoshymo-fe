@@ -1,0 +1,35 @@
+<mat-toolbar>
+  <span>{{ title }}</span>
+
+  <span style="margin-left: 1%;"></span>
+
+  <button mat-button (click)="onClickGoAccount();">Account</button>
+  <button mat-button (click)="onClickGoAbout();">About</button>
+
+  <span style="flex: 1 1 auto;"></span>
+
+  <div *ngIf="afAuth.user | async as user; else showLogin">
+    <img src="{{ user.photoURL }}"
+      style="vertical-align: middle; width: 2em; height: 2em;">
+    <button mat-button [matMenuTriggerFor]="menuAccount">{{ user.displayName }}</button>
+    <!--
+    {{ user.uid }}
+    {{ user.email }}
+    {{ user.emailVerified }}
+    {{ user.isAnonymous }}
+    {{ user.providerId }} {{ user.providerData }}
+    -->
+    <mat-menu #menuAccount="matMenu">
+      <button mat-button (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+  <ng-template #showLogin>
+    <button mat-button (click)="login()">Login with Google</button>
+  </ng-template>
+
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<button mat-raised-button color="primary" style="margin: 1em" 
+  (click)="onClickTest();">Test 1</button>
