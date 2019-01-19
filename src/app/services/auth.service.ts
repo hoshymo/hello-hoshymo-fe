@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 import { Subscription } from 'rxjs';
@@ -16,8 +15,6 @@ export class AuthService {
     private router: Router,
     private afAuth: AngularFireAuth
   ) {
-    console.log("AuthService ctor - ");
-
     // // this also works, but either way you have to have init.json in 
     // // environments.firebase or the app crushes in some place
     // fetch('/__/firebase/init.json').then(response => {
@@ -34,7 +31,6 @@ export class AuthService {
     // });
 
     this.afAuth.user.subscribe(user => {
-      console.log('(X) user', user);
       this.fbUser = user;
     });
   }

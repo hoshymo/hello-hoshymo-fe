@@ -1,6 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AccountComponent } from './account.component';
+
+import { FirebaseOptionsToken } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { MatCardModule } from '@angular/material';
+import { environment } from '../../environments/environment';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -8,7 +14,15 @@ describe('AccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountComponent ]
+      declarations: [ AccountComponent ],
+      imports: [
+        RouterTestingModule,
+        MatCardModule,
+        AngularFireAuthModule
+      ],
+      providers: [
+        { provide: FirebaseOptionsToken, useValue: environment.firebase },
+      ]
     })
     .compileComponents();
   }));

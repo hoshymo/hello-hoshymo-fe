@@ -1,11 +1,28 @@
 import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { By } from '@angular/platform-browser';
+
+import { MatMenuModule, MatToolbarModule, MatSnackBarModule } from '@angular/material';
+import { FirebaseOptionsToken } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
+
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
       ],
+      imports: [
+        RouterTestingModule, // "No provider for Router!"
+        MatMenuModule, MatToolbarModule, MatSnackBarModule,
+        AngularFireAuthModule
+      ],
+      providers: [
+        { provide: FirebaseOptionsToken, useValue: environment.firebase },
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
@@ -13,15 +30,17 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'hello-hoshymo-fe'`, async(() => {
+  it(`should have as title 'Hello'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('hello-hoshymo-fe');
+    expect(app.title).toEqual('Hello');
   }));
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to hello-hoshymo-fe!');
+    // const compiled = fixture.debugElement.nativeElement;
+    // expect(compiled.querySelector('h1').textContent).toContain('Welcome to hello-hoshymo-fe!');
+    expect(fixture.debugElement.query(By.css('.title'))
+      .nativeElement.textContent).toContain('Hello');
   }));
 });
