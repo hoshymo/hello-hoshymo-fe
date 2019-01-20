@@ -1,0 +1,20 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isUserAuthenticated(userID) {
+      return request.auth.uid == userID;
+    }
+
+  	match /user-comments/{userID} {
+    	allow read: if isAuthenticated() && isUserAuthenticated(userID);
+      allow write: if isAuthenticated() && isUserAuthenticated(userID);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

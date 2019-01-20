@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Build & Deploy
+
+1. `ng build --prod=true`
+2. `firebase -P hello-hoshymo deploy --only firestore:rules`
+3. `firebase -P hello-hoshymo deploy --only hosting`
