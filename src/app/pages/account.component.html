@@ -11,13 +11,24 @@
   <img mat-card-image src="{{ userPhotoURL }}">
 
   <mat-card-content>
+    <mat-form-field style="width: 100%">
+      <!-- https://github.com/angular/material2/issues/12070#issuecomment-420088231 -->
+      <textarea #usercomment matInput placeholder="Leave your message" value="{{ (oUserComment | async)?.commentText }}"></textarea>
+    </mat-form-field>
+
+    <mat-card-actions>
+      <button mat-button (click)="onClickSaveComment(usercomment.value)">Save Message</button>
+    </mat-card-actions>
+  </mat-card-content>
+
+  <mat-card-content>
     <p>
       {{ idToken }}
     </p>
-  </mat-card-content>
 
-  <mat-card-actions>
-    <button mat-button (click)="onClickMyAccount()">Show IdToken String</button>
-  </mat-card-actions>
+    <mat-card-actions>
+      <button mat-button (click)="onClickShowIdTokenString()">Show IdToken String</button>
+    </mat-card-actions>
+  </mat-card-content>
 
 </mat-card>
