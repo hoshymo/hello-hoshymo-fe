@@ -5,7 +5,9 @@ import { AccountComponent } from './account.component';
 
 import { FirebaseOptionsToken } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { MatCardModule } from '@angular/material';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../../environments/environment';
 
 describe('AccountComponent', () => {
@@ -17,8 +19,9 @@ describe('AccountComponent', () => {
       declarations: [ AccountComponent ],
       imports: [
         RouterTestingModule,
-        MatCardModule,
-        AngularFireAuthModule
+        MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
+        NoopAnimationsModule,
+        AngularFireAuthModule, AngularFirestoreModule
       ],
       providers: [
         { provide: FirebaseOptionsToken, useValue: environment.firebase },
