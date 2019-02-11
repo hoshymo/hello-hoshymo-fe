@@ -1,33 +1,29 @@
 
 <span style="margin: 1em"></span>
 
-<mat-card class="example-card" style="width: 300px; margin-left: auto; margin-right: auto">
+<mat-card class="example-card" style="width: 80%; margin-left: auto; margin-right: auto">
 
-  <mat-card-header>
-    <mat-card-title>{{ userDisplayName }}</mat-card-title>
+  <mat-card-title-group>
+    <mat-card-title>{{ (user$ | async)?.displayName }}</mat-card-title>
     <mat-card-subtitle>Authenticated</mat-card-subtitle>
-  </mat-card-header>
+    <img mat-card-md-image src="{{ (user$ | async)?.photoURL }}"/>
+  </mat-card-title-group>
+  <!-- <mat-card-content>
+    user: {{ user$ | async | json }}
+  </mat-card-content> -->
 
-  <img mat-card-image src="{{ userPhotoURL }}">
+  <mat-card-content>
+      uid: {{ (user$ | async)?.uid }}
+  </mat-card-content>
 
   <mat-card-content>
     <mat-form-field style="width: 100%">
       <!-- https://github.com/angular/material2/issues/12070#issuecomment-420088231 -->
-      <textarea #usercomment matInput placeholder="Leave your message" value="{{ (oUserComment | async)?.commentText }}"></textarea>
+      <textarea #usercomment matInput placeholder="Leave your message" value="{{ (userComment$ | async)?.commentText }}"></textarea>
     </mat-form-field>
 
     <mat-card-actions>
       <button mat-button (click)="onClickSaveComment(usercomment.value)">Save Message</button>
-    </mat-card-actions>
-  </mat-card-content>
-
-  <mat-card-content>
-    <p>
-      {{ idToken }}
-    </p>
-
-    <mat-card-actions>
-      <button mat-button (click)="onClickShowIdTokenString()">Show IdToken String</button>
     </mat-card-actions>
   </mat-card-content>
 
