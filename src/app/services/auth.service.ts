@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private subsUser: Subscription; // TODO unsubscribe
-  private fbUser: firebase.User;
+export class AuthService implements OnDestroy {
+  private currentUser: firebase.User;
+  private user$: Observable<firebase.User>;
+  private userSubs: Subscription;
 
   constructor(
     private router: Router,
@@ -30,17 +31,27 @@ export class AuthService {
     //   console.log("(E) failed to get firebase/init.json! (2)", e);
     // });
 
-    this.afAuth.user.subscribe(user => {
-      this.fbUser = user;
+    this.user$ = this.afAuth.user;
+
+    this.userSubs = this.afAuth.user.subscribe(user => {
+      this.currentUser = user;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubs)
+      this.userSubs.unsubscribe();
   }
 
   logout() {
     this.router.navigate(['/']);
   }
 
-  getAuthenticatedUser(): firebase.User {
-    return this.fbUser;
+  isAuthenticated(): boolean {
+    return (this.currentUser !== undefined);
   }
 
+  getUserObservable(): Observable<firebase.User> {
+    return this.user$;
+  }
 }
