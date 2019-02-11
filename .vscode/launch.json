@@ -10,6 +10,16 @@
             "name": "Chrome > localhost",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "functions",
+            "program": "${workspaceFolder}\\functions\\lib\\index.js",
+            "useWSL": true,
+            "outFiles": [
+                "${workspaceFolder}/functions/lib/**/*.js"
+            ]
         }
     ]
 }
