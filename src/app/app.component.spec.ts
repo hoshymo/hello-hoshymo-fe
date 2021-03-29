@@ -2,7 +2,9 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
-import { MatMenuModule, MatToolbarModule, MatSnackBarModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { FirebaseOptionsToken } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
