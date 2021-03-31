@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase/app';
+import firebase from 'firebase/app';
 import { AuthService } from '../app/services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +24,11 @@ export class AppComponent {
   }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.afAuth.signOut();
     this.router.navigate(['/']);
   }
 
@@ -46,12 +46,12 @@ export class AppComponent {
   onClickGoAbout() {
     this.router.navigate(['/about']);
   }
-  
+
   onClickTest() {
-    console.log("test");
+    console.log('test');
     this.afAuth.user.subscribe(user => {
       user.getIdToken().then(idtoken => {
-        console.log("idToken: " + idtoken);
+        console.log('idToken: ' + idtoken);
       });
     });
   }

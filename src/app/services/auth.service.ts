@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
+import firebase from 'firebase/app';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -16,7 +17,7 @@ export class AuthService implements OnDestroy {
     private router: Router,
     private afAuth: AngularFireAuth
   ) {
-    // // this also works, but either way you have to have init.json in 
+    // // this also works, but either way you have to have init.json in
     // // environments.firebase or the app crushes in some place
     // fetch('/__/firebase/init.json').then(response => {
     //   if (!response.ok) {
@@ -39,8 +40,9 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.userSubs)
+    if (this.userSubs) {
       this.userSubs.unsubscribe();
+    }
   }
 
   logout() {

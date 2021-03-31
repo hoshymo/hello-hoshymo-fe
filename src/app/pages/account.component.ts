@@ -1,9 +1,10 @@
 import { AuthService } from '../services/auth.service';
 import { UserComment, UserdataService } from '../services/userdata.service';
 
+import firebase from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Observable } from 'rxjs';
 
@@ -40,13 +41,13 @@ export class AccountComponent implements OnInit, OnDestroy {
   // ngAfterViewChecked() {}
 
   onClickSaveComment(inVal: string) {
-    let comment = {
+    const comment = {
       commentText: inVal, createdAtMs: (new Date()).getTime()
-    }
+    };
     this.userdataService.saveUserComment(this.user$, comment, () => {
       this.snackBar.open('Saved!', 'i', { duration: 1000 });
     }, err => {
-      console.log("(E) failed to save comment. ", err);
+      console.log('(E) failed to save comment. ', err);
     });
   }
 }

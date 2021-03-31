@@ -1,12 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AccountComponent } from './account.component';
 
-import { FirebaseOptionsToken } from '@angular/fire';
+import { FIREBASE_OPTIONS } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../../environments/environment';
 
@@ -14,7 +17,7 @@ describe('AccountComponent', () => {
   let component: AccountComponent;
   let fixture: ComponentFixture<AccountComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ AccountComponent ],
       imports: [
@@ -24,7 +27,7 @@ describe('AccountComponent', () => {
         AngularFireAuthModule, AngularFirestoreModule
       ],
       providers: [
-        { provide: FirebaseOptionsToken, useValue: environment.firebase },
+        { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
       ]
     })
     .compileComponents();
