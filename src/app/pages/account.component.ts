@@ -1,6 +1,7 @@
 import { AuthService } from '../services/auth.service';
 import { UserComment, UserdataService } from '../services/userdata.service';
 
+import firebase from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
