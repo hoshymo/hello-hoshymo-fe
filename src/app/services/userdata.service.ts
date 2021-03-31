@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import firebase from 'firebase/app';
 
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -24,7 +25,7 @@ export class UserdataService {
 
   getUserCommentObservable(user$: Observable<firebase.User>): Observable<UserComment> {
     return user$.pipe(take(1), mergeMap(user => {
-      let itemDoc = this.getUserCommentDoc(user.uid);
+      const itemDoc = this.getUserCommentDoc(user.uid);
       // if subscription is needed ...
       // this.userCommentSubs = itemDoc.snapshotChanges().subscribe(action => {
       //   this.userCommentText = action.payload.data().commentText;
@@ -38,13 +39,15 @@ export class UserdataService {
   saveUserComment(user$: Observable<firebase.User>, comment: UserComment,
       onfulfilled?: () => void, onrejected?: (err: any) => void): void {
     user$.pipe(take(1)).subscribe(user => {
-      let itemDoc = this.getUserCommentDoc(user.uid);
+      const itemDoc = this.getUserCommentDoc(user.uid);
       itemDoc.set(comment).then(() => {
-        if (onfulfilled)
+        if (onfulfilled) {
           onfulfilled();
+        }
       }).catch(err => {
-        if (onrejected)
+        if (onrejected) {
           onrejected(err);
+        }
       });
     });
   }

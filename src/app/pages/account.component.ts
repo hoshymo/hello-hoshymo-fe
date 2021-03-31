@@ -40,13 +40,13 @@ export class AccountComponent implements OnInit, OnDestroy {
   // ngAfterViewChecked() {}
 
   onClickSaveComment(inVal: string) {
-    let comment = {
+    const comment = {
       commentText: inVal, createdAtMs: (new Date()).getTime()
-    }
+    };
     this.userdataService.saveUserComment(this.user$, comment, () => {
       this.snackBar.open('Saved!', 'i', { duration: 1000 });
     }, err => {
-      console.log("(E) failed to save comment. ", err);
+      console.log('(E) failed to save comment. ', err);
     });
   }
 }

@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FirebaseOptionsToken } from '@angular/fire';
+import { FIREBASE_OPTIONS } from '@angular/fire';
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './pages/account.component';
@@ -33,13 +33,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatToolbarModule, MatMenuModule, MatButtonModule, MatCheckboxModule, MatCardModule, MatSnackBarModule, MatFormFieldModule, MatInputModule,
+    MatToolbarModule, MatMenuModule, MatButtonModule, MatCheckboxModule,
+    MatCardModule, MatSnackBarModule, MatFormFieldModule, MatInputModule,
     AngularFireModule,
     // AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, AngularFirestoreModule
   ],
   providers: [
-    { provide: FirebaseOptionsToken, useValue: environment.firebase },
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
   ],
   bootstrap: [AppComponent]
 })
