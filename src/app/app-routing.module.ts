@@ -6,10 +6,11 @@ import { AboutComponent } from './pages/about.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-    // {
-    //     path: '',
-    //     component: AppComponent
-    // },
+    {
+        path: '',
+        redirectTo: 'about',
+        pathMatch: 'full'
+    },
     {
         path: 'account',
         component: AccountComponent,

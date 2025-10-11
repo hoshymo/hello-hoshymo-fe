@@ -31,6 +31,10 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.userComment$ = this.userdataService.getUserCommentObservable(this.user$);
   }
 
+  ngOnDestroy() {
+    // This is intentionally left blank.
+  }
+
 
   // use with caution, this might cause infinite loop if a promise operation
   // is inside (or in more complex condition)
