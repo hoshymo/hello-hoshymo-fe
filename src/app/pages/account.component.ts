@@ -1,7 +1,7 @@
 import { AuthService } from '../services/auth.service';
 import { UserComment, UserdataService } from '../services/userdata.service';
 
-import firebase from 'firebase/app';
+import { User } from '@angular/fire/auth';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class AccountComponent implements OnInit, OnDestroy {
 
   public userComment$: Observable<UserComment>;
-  public user$: Observable<firebase.User>;
+  public user$: Observable<User>;
 
   constructor(
     private router: Router,
@@ -31,10 +31,6 @@ export class AccountComponent implements OnInit, OnDestroy {
     this.userComment$ = this.userdataService.getUserCommentObservable(this.user$);
   }
 
-  ngOnDestroy() {
-    // if (this.userCommentSubs)
-    //   this.userCommentSubs.unsubscribe();
-  }
 
   // use with caution, this might cause infinite loop if a promise operation
   // is inside (or in more complex condition)

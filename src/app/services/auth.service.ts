@@ -1,7 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
+import { Auth, User, authState } from '@angular/fire/auth';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -9,32 +8,17 @@ import { Observable, Subscription } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService implements OnDestroy {
-  private currentUser: firebase.User;
-  private user$: Observable<firebase.User>;
+  private currentUser: User;
+  private user$: Observable<User>;
   private userSubs: Subscription;
 
   constructor(
     private router: Router,
-    private afAuth: AngularFireAuth
+    private auth: Auth
   ) {
-    // // this also works, but either way you have to have init.json in
-    // // environments.firebase or the app crushes in some place
-    // fetch('/__/firebase/init.json').then(response => {
-    //   if (!response.ok) {
-    //     console.log("(E) failed to get firebase/init.json! (1)");
-    //     return;
-    //   }
-    //   response.json().then(o => {
-    //     AngularFireModule.initializeApp(o);
-    //     console.log("firebase initialized. ", o);
-    //   });
-    // }).catch(e => {
-    //   console.log("(E) failed to get firebase/init.json! (2)", e);
-    // });
+    this.user$ = authState(this.auth);
 
-    this.user$ = this.afAuth.user;
-
-    this.userSubs = this.afAuth.user.subscribe(user => {
+    this.userSubs = authState(this.auth).subscribe(user => {
       this.currentUser = user;
     });
   }
@@ -53,7 +37,7 @@ export class AuthService implements OnDestroy {
     return (this.currentUser !== undefined);
   }
 
-  getUserObservable(): Observable<firebase.User> {
+  getUserObservable(): Observable<User> {
     return this.user$;
   }
 }

@@ -4,10 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { FIREBASE_OPTIONS } from '@angular/fire';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { AccountComponent } from './pages/account.component';
@@ -35,13 +34,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BrowserAnimationsModule,
     MatToolbarModule, MatMenuModule, MatButtonModule, MatCheckboxModule,
     MatCardModule, MatSnackBarModule, MatFormFieldModule, MatInputModule,
-    AngularFireModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule, AngularFirestoreModule
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
   ],
-  providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

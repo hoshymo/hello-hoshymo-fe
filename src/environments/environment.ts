@@ -5,6 +5,12 @@
 export const environment = {
   production: false,
   firebase: {
+    "apiKey": "AIzaSyAy4xhX5TcvLvPCNkmXKwCF6CqbCcN0p0M",
+    "databaseURL": "https://hello-hoshymo.firebaseio.com",
+    "storageBucket": "hello-hoshymo.appspot.com",
+    "authDomain": "hello-hoshymo.firebaseapp.com",
+    "messagingSenderId": "346579032531",
+    "projectId": "hello-hoshymo"
   }
 };
 

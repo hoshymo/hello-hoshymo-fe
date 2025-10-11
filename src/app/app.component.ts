@@ -1,9 +1,18 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import firebase from 'firebase/app';
+import { Auth, GoogleAuthProvider, signInWithPopup, authState } from '@angular/fire/auth';
 import { AuthService } from '../app/services/auth.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+class TextCard {
+  header: string;
+  desc: string;
+
+  constructor (header: string, desc: string) {
+    this.header = header;
+    this.desc = desc;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -12,28 +21,31 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppComponent {
   title = 'Hello';
+  cards = new Array<TextCard>();
 
   constructor(
     private router: Router,
-    public afAuth: AngularFireAuth,
+    public auth: Auth,
     private snackBar: MatSnackBar,
     private authService: AuthService // need to be here to prioritize initialization
     ) {
     // let as = new AuthService();
     // console.log(as);
+
+    this.cards.push(new TextCard("Hello", "desc"));
   }
 
   login() {
-    this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    signInWithPopup(this.auth, new GoogleAuthProvider());
   }
 
   logout() {
-    this.afAuth.signOut();
+    this.auth.signOut();
     this.router.navigate(['/']);
   }
 
   onClickGoAccount() {
-    if (this.afAuth.user == null) {
+    if (this.auth.currentUser == null) {
       this.snackBar.open('Please log in first.', 'Error', {
         duration: 1000,
       });
@@ -49,10 +61,12 @@ export class AppComponent {
 
   onClickTest() {
     console.log('test');
-    this.afAuth.user.subscribe(user => {
+    authState(this.auth).subscribe(user => {
       user.getIdToken().then(idtoken => {
         console.log('idToken: ' + idtoken);
       });
     });
+
+    this.cards.push(new TextCard("2", "desc"));
   }
 }

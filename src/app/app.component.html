@@ -8,7 +8,7 @@
 
   <span style="flex: 1 1 auto;"></span>
 
-  <div *ngIf="afAuth.user | async as user; else showLogin">
+  <div *ngIf="auth.currentUser | async as user; else showLogin">
     <img src="{{ user.photoURL }}"
       style="vertical-align: middle; width: 2em; height: 2em;">
     <button mat-button [matMenuTriggerFor]="menuAccount">{{ user.displayName }}</button>
@@ -33,3 +33,18 @@
 
 <button mat-raised-button color="primary" style="margin: 1em" 
   (click)="onClickTest();">Test 1</button>
+
+
+<div class="col-xs-6 col-md-4 home-content" *ngFor="let s of cards">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{s.header}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p> {{s.desc}} </p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button type="submit" color="primary">Submit</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
