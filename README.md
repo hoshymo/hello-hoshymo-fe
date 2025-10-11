@@ -32,12 +32,3 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 2. `firebase -P hello-hoshymo deploy --only firestore:rules`
 3. `firebase -P hello-hoshymo deploy --only hosting`
 
-
-x VSCode Ctrl + Tab の挙動が普通と違う...
-  ふつう Ctrl を話すと quick open pallet? が閉じるが開いたままになる。Shift + Ctrl + Tab の場合おなじ操作で閉じる。
-  x わからん。ためしに Insider を入れてみたがおなじ。設定でもない、実装でもない、もしかして Ubuntu
-    + VSCode の合わせ技なんだろうか。
-
-x compile が遅い...
-https://github.com/angular/angular/issues/40635
-incremental は NG_BUILD_IVY_LEGACY=1 でよくなる? ちょっと古い情報。
