@@ -2,20 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthService } from './auth.service';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../../environments/environment';
 
 describe('AuthService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       RouterTestingModule,
-      AngularFireAuthModule
-    ],
-  providers: [
-      { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+      provideFirebaseApp(() => initializeApp(environment.firebase)),
+      provideAuth(() => getAuth()),
     ]
-}));
+  }));
 
   it('should be created', () => {
     const service: AuthService = TestBed.get(AuthService);

@@ -3,9 +3,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AccountComponent } from './account.component';
 
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,18 +19,17 @@ describe('AccountComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountComponent ],
+      declarations: [AccountComponent],
       imports: [
         RouterTestingModule,
         MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule,
         NoopAnimationsModule,
-        AngularFireAuthModule, AngularFirestoreModule
-      ],
-      providers: [
-        { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

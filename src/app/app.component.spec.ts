@@ -2,11 +2,13 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
@@ -19,11 +21,9 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule, // "No provider for Router!"
-        MatMenuModule, MatToolbarModule, MatSnackBarModule,
-        AngularFireAuthModule
-      ],
-      providers: [
-        { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+        MatMenuModule, MatToolbarModule, MatSnackBarModule, MatCardModule, MatButtonModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
       ]
     }).compileComponents();
   }));

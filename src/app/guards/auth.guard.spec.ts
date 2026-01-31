@@ -3,8 +3,8 @@ import { TestBed, inject } from '@angular/core/testing';
 import { AuthGuard } from './auth.guard';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { FirebaseOptionsToken } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { environment } from '../../environments/environment';
 
 describe('AuthGuard', () => {
@@ -12,10 +12,8 @@ describe('AuthGuard', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        AngularFireAuthModule
-      ],
-      providers: [
-        { provide: FirebaseOptionsToken, useValue: environment.firebase },
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
       ]
     });
   });
