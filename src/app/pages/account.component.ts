@@ -4,7 +4,7 @@ import { UserComment, UserdataService } from '../services/userdata.service';
 import { User } from '@angular/fire/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 import { Observable } from 'rxjs';
 
