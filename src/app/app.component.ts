@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithPopup, authState } from '@angular/fire/auth';
 import { AuthService } from '../app/services/auth.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 class TextCard {
   header: string;
